@@ -43,7 +43,7 @@ func main() {
 	})
 
 	//redisに接続
-	r.Static("/style", "./style")
+	r.Static("/css", "./css")
 	r.LoadHTMLGlob("views/*")
 	r.GET("/login", indexHandler)
 	r.GET("/", homeHandler)
