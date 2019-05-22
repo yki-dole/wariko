@@ -5,7 +5,10 @@ div.menu_bar{
 div.menu_box{
   text-align: center;
 }
-
+div.menu_box:hover{
+  border-style:solid;
+  border-color: white
+}
 a.menu_text{
   color: #f4f4f4;
   text-decoration: none;
