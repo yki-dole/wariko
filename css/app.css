@@ -8,7 +8,7 @@ div.menu_box{
 div.menu_box:hover{
   border-style:solid;
   border-color: white;
-   border-width:2px 0px 0px 0px;
+   border-width:0px 2px 0px 2px;
 }
 a.menu_text{
   color: #f4f4f4;
