@@ -6,5 +6,5 @@ div.menu_bar{
 a.menu_text{
   color: #f4f4f4;
   text-decoration: none;
-  text-align: center;
+  line-height: normal;
 }
