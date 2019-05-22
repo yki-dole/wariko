@@ -3,7 +3,8 @@ div.menu_bar{
 
 }
 
-a{
+a.menu_text{
   color: red;
   text-decoration: none;
+  text-align: center;
 }
