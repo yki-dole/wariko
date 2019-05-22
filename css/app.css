@@ -6,7 +6,7 @@ div.menu_box{
   text-align: center;
 }
 div.picture_box{
-  background-image: url("./views/sunset-4096828_1920.jpg");
+  background-image: url("../views/sunset-4096828_1920.jpg");
 }
 div.menu_box:hover{
   border-style:solid;
