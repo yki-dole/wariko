@@ -4,4 +4,5 @@ div#manu_bar{
 }
 a{
   color: red;
+  text-decoration: none;
 }
