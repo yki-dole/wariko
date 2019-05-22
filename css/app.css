@@ -5,6 +5,9 @@ div.menu_bar{
 div.menu_box{
   text-align: center;
 }
+div.picture_box{
+  background-image: url("../views/landscape-4208544_1920.jpg");
+}
 div.menu_box:hover{
   border-style:solid;
   background: #7f7f7f;
