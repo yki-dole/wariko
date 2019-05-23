@@ -7,7 +7,6 @@ div.menu_box{
 }
 div.picture_box{
   background: #7f7f7f;
-  background-image:url("../picture/landscape-4208544_1920.jpg");
 }
 div.menu_box:hover{
   border-style:solid;
