@@ -7,7 +7,7 @@ div.menu_box{
 }
 div.picture_box{
 
-  background-image:url(../picture/landscape-4208544_1920.jpg);
+  background-image:url("../picture/landscape-4208544_1920.jpg");
 
   background-size: auto;
 }
