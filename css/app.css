@@ -4,12 +4,14 @@ div.menu_bar{
 }
 
 div.menu_box{
+  height: 30px;
   text-align: center;
 }
 div.picture_box{
 
 }
 div.menu_box:hover{
+  height: 30px;
   border-style:solid;
   background: #7f7f7f;
   border-color: white;
