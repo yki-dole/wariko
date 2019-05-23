@@ -6,7 +6,8 @@ div.menu_box{
   text-align: center;
 }
 div.picture_box{
-  background: #7f7f7f;
+  background-size: auto;
+  background-image:url(../picture/landscape-4208544_1920.jpg);
 }
 div.menu_box:hover{
   border-style:solid;
