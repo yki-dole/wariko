@@ -5,6 +5,7 @@ div.menu_bar{
 
 p.text{
   height: 30px;
+  margin-bottom: 0px;
 }
 div.menu_box{
   height: 30px;
