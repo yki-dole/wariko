@@ -5,6 +5,9 @@ div.menu_bar{
 div.menu_box{
   text-align: center;
 }
+div.picture_box{
+  
+}
 div.menu_box:hover{
   border-style:solid;
   background: #7f7f7f;
