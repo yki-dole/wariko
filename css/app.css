@@ -2,7 +2,8 @@ div.menu_bar{
   background: #5f5f5f;
   height: 30px;
 }
-div.menu_logo{
+
+p.text{
   height: 30px;
 }
 div.menu_box{
