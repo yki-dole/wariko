@@ -15,6 +15,7 @@ div.picture_box{
 }
 div.menu_box:hover{
   height: 30px;
+  margin-bottom: 0px;
   border-style:solid;
   background: #7f7f7f;
   border-color: white;
