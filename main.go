@@ -9,9 +9,16 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type userForm struct {
+type userMakeForm struct {
+	Id   string `form:"user_id"`
 	Name string `form:"user_name"`
 	Pass string `form:"pass"`
+	Sex  bool   `form:"sex"`
+}
+type userForm struct {
+	Id   string `form:"user_id"`
+	Name string `form:"user_name"`
+	Sex  bool   `form:"sex"`
 }
 type urlData struct {
 	Url     string `form:"add_url"`
@@ -46,13 +53,13 @@ func main() {
 	r.Static("/css", "./css")
 	r.Static("/picture", "./picture")
 	r.LoadHTMLGlob("views/*")
-	r.GET("/login", indexHandler)
+	r.GET("/signin", loginFormHandler)
 	r.GET("/", homeHandler)
 
 	r.GET("/makeform", makeFormHandler)
 
 	r.POST("/user", loginFormHandler)
-	r.POST("/makeaccount", makeAccountHandler)
+	r.POST("/signup", makeAccountHandler)
 
 	r.Run(":" + port)
 }
@@ -76,25 +83,25 @@ func indexHandler(c *gin.Context) {
 	})
 }
 func makeAccountHandler(c *gin.Context) {
-	var newForm userForm
+	var newForm userMakeForm
 	ci, err := redis.DialURL(os.Getenv("REDIS_URL"))
 	check(err)
 	c.Bind(&newForm)
 	defer ci.Close()
-	if (newForm.Name == "") || (newForm.Pass == "") {
+	if (newForm.Id == "") || (newForm.Pass == "") {
 		c.HTML(200, "make_form.html", gin.H{
 			"errortxt": "error:Prease fill out",
 		})
 	} else {
 		ci.Do("SELECT", 0)
-		maked, err := ci.Do("EXISTS", newForm.Name)
+		maked, err := ci.Do("EXISTS", newForm.Id)
 		check(err)
 		var i int64
 		i = 0
 		if maked == i {
-			ci.Do("HSET", newForm.Name, "pass", newForm.Pass)
-			urlListSize := 0
-			ci.Do("HSET", newForm.Name, "urlListSize", urlListSize)
+			ci.Do("HSET", newForm.Id, "pass", newForm.Pass)
+			ci.Do("HSET", newForm.Id, "NN", newForm.Name)
+			ci.Do("HSET", newForm.Id, "sex", newForm.Sex)
 			c.HTML(200, "form.html", nil)
 		} else {
 			c.HTML(200, "make_form.html", gin.H{

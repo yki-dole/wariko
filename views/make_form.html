@@ -14,14 +14,20 @@
 
   <div class="box">
     <form action="/makeaccount" method="POST">
-    <p>make account</p>
-
-    <p>user name</p>
-    <input type="text" pattern="^[0-9a-z]+$" name="user_name" >
+    <p>アカウント作成</p>
+    <input type="text" pattern="^[0-9a-z]+$" name="user_id" >
+    <p>ニックネーム</p>
+    <input type="text" name="user_name" >
     <br>
-    <p>password</p>
-    <input type="password" pattern="^[0-9a-z]+$" name="pass" >
+    <p>パスワード</p>
+    <input type="password" id="password" pattern="^[0-9a-z]+$" name="pass" >
     <br>
+    <p>パスワード 確認</p>
+    <input type="password" id="confirm_password" name="confirm_password" pattern="^[0-9a-z]+$" onkeyup="setConfirmMessage(this.value);">
+    <br>
+    <p>性別</p>
+    <input type="radio" value="0" name="sex">
+    <input type="radio" value="1" name="sex"> 
     <br>
     <input type="submit"  class="button02" value="作成"/>
     </form>
