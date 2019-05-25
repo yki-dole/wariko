@@ -1,14 +1,13 @@
 $(document).foundation()
-function setConfirmMessage(confirm_password) {
- var password = document.getElementById("password").value;
- var message = "";
- if (password == confirm_password) {
-   message = "";
- } else {
-   message =  "パスワードが一致しません";
- }
 
- var div = document.getElementById("pass_confirm_message");
- if (!div.hasFistChild) {div.appendChild(document.createTextNode(""));}
- div.firstChild.data = message;
-}
+function CheckPassword(confirm){
+		// 入力値取得
+		var input1 = password.value;
+		var input2 = confirm.value;
+		// パスワード比較
+		if(input1 != input2){
+			confirm.setCustomValidity("入力値が一致しません。");
+		}else{
+			confirm.setCustomValidity('');
+		}
+	}

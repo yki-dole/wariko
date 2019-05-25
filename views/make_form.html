@@ -1,19 +1,15 @@
 <head>
   <link rel="stylesheet" href="style/css/foundation.css">
   <link rel="stylesheet" href="style/css/app.css">
-  <script src="js/vendor/jquery.js"></script>
-  <script src="js/vendor/what-input.js"></script>
-  <script src="js/vendor/foundation.js"></script>
   <script src="js/app.js"></script>
 </head>
 
 
 <body>
   <header>
-    
+
   </header>
   <center>
-
   <div class="box">
     <form action="/makeaccount" method="POST">
     <p>アカウント作成</p>
@@ -25,11 +21,11 @@
     <input type="password" id="password" pattern="^[0-9a-z]+$" name="pass" >
     <br>
     <p>パスワード 確認</p>
-    <input type="password" id="confirm_password" name="confirm_password" pattern="^[0-9a-z]+$" onkeyup="setConfirmMessage(this.value);">
+    <input type="password" class="form-control" name="confirm" oninput="CheckPassword(this)" required>
     <br>
     <p>性別</p>
-    <input type="radio" value="0" name="sex">
-    <input type="radio" value="1" name="sex">
+    <input type="radio" value="0" name="sex">男性
+    <input type="radio" value="1" name="sex">女性
     <br>
     <input type="submit"  class="button02" value="作成"/>
     </form>
