@@ -7,12 +7,13 @@
   <script src="js/app.js"></script>
 </head>
 
+
 <body>
+  <header>
+    
+  </header>
   <center>
 
-    <header>
-
-    </header>
   <div class="box">
     <form action="/makeaccount" method="POST">
     <p>アカウント作成</p>
@@ -24,6 +25,7 @@
     <input type="password" id="password" pattern="^[0-9a-z]+$" name="pass" >
     <br>
     <p>パスワード 確認</p>
+    <input type="password" id="confirm_password" name="confirm_password" pattern="^[0-9a-z]+$" onkeyup="setConfirmMessage(this.value);">
     <br>
     <p>性別</p>
     <input type="radio" value="0" name="sex">
