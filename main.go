@@ -20,6 +20,11 @@ type userForm struct {
 	Name string `form:"user_name"`
 	Sex  bool   `form:"sex"`
 }
+type loginForm struct {
+	Id string `form:"user_id"`
+
+	Pass string `form:"pass"`
+}
 type urlData struct {
 	Url     string `form:"add_url"`
 	Type    string `form:"type"`
@@ -129,25 +134,24 @@ func userHandler(c *gin.Context) {
 }
 func loginFormHandler(c *gin.Context) {
 
-	var fakeForm userForm
+	var fakeForm loginForm
 	c.Bind(&fakeForm)
 	ci, err := redis.DialURL(os.Getenv("REDIS_URL"))
 	check(err)
 	ci.Do("SELECT", 0)
 
 	defer ci.Close()
-	maked, err := ci.Do("EXISTS", fakeForm.Name)
+	maked, err := ci.Do("EXISTS", fakeForm.Id)
 	if err != nil {
 		panic(err)
 	}
 	var i int64
 	i = 1
 	if maked == i {
-		truePass, err := redis.String(ci.Do("HGET", fakeForm.Name, "pass"))
+		truePass, err := redis.String(ci.Do("HGET", fakeForm.Id, "pass"))
 		check(err)
 		if truePass == fakeForm.Pass {
-			text := "Hello " + fakeForm.Name + " !!"
-			user.Name = fakeForm.Name
+			text := "Hello " + fakeForm.Id + " !!"
 
 			c.HTML(200, "user.html", gin.H{
 				"name": text,
