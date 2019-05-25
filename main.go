@@ -59,9 +59,8 @@ func main() {
 	r.Static("/picture", "./picture")
 	r.LoadHTMLGlob("views/*")
 	r.GET("/signin", loginFormHandler)
+	r.GET("/signup", makeAccountFormHandler)
 	r.GET("/", homeHandler)
-
-	r.GET("/makeform", makeFormHandler)
 
 	r.POST("/user", loginFormHandler)
 	r.POST("/signup", makeAccountHandler)
@@ -74,10 +73,8 @@ func check(er error) {
 		panic(er)
 	}
 }
-func makeFormHandler(c *gin.Context) {
-	c.HTML(200, "make_form.html", gin.H{
-		"errortxt": "",
-	})
+func makeAccountFormHandler(c *gin.Context) {
+	c.HTML(200, "make_form.html", nil)
 }
 func homeHandler(c *gin.Context) {
 	c.HTML(200, "home.html", nil)
