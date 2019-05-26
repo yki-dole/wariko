@@ -59,11 +59,13 @@ func main() {
 	r.Static("/picture", "./picture")
 	r.LoadHTMLGlob("views/*")
 	r.GET("/signin", loginFormHandler)
+
+	r.POST("/signup", makeAccountHandler)
 	r.GET("/signup", makeAccountFormHandler)
+	r.GET("signup/error", makeAccountFormErrorHandler)
 	r.GET("/", homeHandler)
 
 	r.POST("/user", loginFormHandler)
-	r.POST("/signup", makeAccountHandler)
 
 	r.Run(":" + port)
 }
@@ -75,6 +77,9 @@ func check(er error) {
 }
 func makeAccountFormHandler(c *gin.Context) {
 	c.HTML(200, "make_form.html", nil)
+}
+func makeAccountFormErrorHandler(c *gin.Context) {
+	c.HTML(200, "make_form_error.html", nil)
 }
 func homeHandler(c *gin.Context) {
 	c.HTML(200, "home.html", nil)
@@ -91,9 +96,7 @@ func makeAccountHandler(c *gin.Context) {
 	c.Bind(&newForm)
 	defer ci.Close()
 	if (newForm.Id == "") || (newForm.Pass == "") {
-		c.HTML(200, "make_form.html", gin.H{
-			"errortxt": "error:Prease fill out",
-		})
+		c.Redirect(301, "/signup/error")
 	} else {
 		ci.Do("SELECT", 0)
 		maked, err := ci.Do("EXISTS", newForm.Id)
@@ -106,9 +109,7 @@ func makeAccountHandler(c *gin.Context) {
 			ci.Do("HSET", newForm.Id, "sex", newForm.Sex)
 			c.HTML(200, "form.html", nil)
 		} else {
-			c.HTML(200, "make_form.html", gin.H{
-				"errortxt": "error",
-			})
+			c.Redirect(301, "/signup/error")
 		}
 
 	}
