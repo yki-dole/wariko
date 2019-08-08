@@ -42,7 +42,7 @@ div.menu_box{
   text-align: center;
 }
 div.picture_box{
-  background: #f8dce0 ;
+  background-color: #f8dce0 ;
 }
 div.menu_box:hover{
   height: 30px;
