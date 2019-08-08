@@ -45,6 +45,9 @@ div.picture_box{
   background-image: url(../picture/landscape-4208544_1920.jpg);
   height: 100%;
 }
+div.form-box{
+  background-color: rgba(255,255,255,0.5);
+}
 
 div.menu_box:hover{
   height: 30px;
