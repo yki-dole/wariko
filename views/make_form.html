@@ -25,8 +25,27 @@
   </div>
 
   <div class="large-12 medium-12 small-12 columns picture_box">
-      <div class="large-6 large-centered columns">
-        伊76cryv
+      <div class="small-8 small-offset-2 medium-8 medium-offset-2 large-6 large-offset-3 columns">
+        <div class="large-10 medium-10 small-10 columns">
+        <form action="/makeaccount" method="POST">
+        <p>アカウント作成</p>
+        ユーザID:<input type="text" pattern="^[0-9a-z]+$" name="user_id" >
+        ニックネーム:
+        <input type="text" name="user_name" >
+        <br>
+        パスワード:
+        <input type="password" id="password" pattern="^[0-9a-z]+$" name="pass" >
+        <br>
+        パスワード 確認:
+        <input type="password" class="form-control" name="confirm" oninput="CheckPassword(this)" required>
+        <br>
+        <p>性別</p>
+        <input type="radio" value="0" name="sex">男性
+        <input type="radio" value="1" name="sex">女性
+        <br>
+        <input type="submit" id="fab" value="作成"/>
+        </form>
+        </div>
         </div>
         <br>
         <a href="/"class="backtext">ホームページへ戻る</a>
