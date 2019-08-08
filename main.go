@@ -84,11 +84,7 @@ func makeAccountFormErrorHandler(c *gin.Context) {
 func homeHandler(c *gin.Context) {
 	c.HTML(200, "home.html", nil)
 }
-func indexHandler(c *gin.Context) {
-	c.HTML(200, "form.html", gin.H{
-		"errortxt": "",
-	})
-}
+
 func makeAccountHandler(c *gin.Context) {
 	var newForm userMakeForm
 	ci, err := redis.DialURL(os.Getenv("REDIS_URL"))
