@@ -1,7 +1,11 @@
 <head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <link rel="stylesheet" href="style/css/foundation.css">
   <link rel="stylesheet" href="style/css/app.css">
   <link rel="stylesheet" href="css/foundation.css">
+  <script src="js/app.js"></script>
   <title>わりこ</title>
 </head>
 
@@ -21,6 +25,29 @@
     <div id="sign-up-box"  class="large-1 medium-2 small-2 columns  menu_box">
       <a href="signup" class="menu_text">sign up</a>
     </div>
+  </div>
+
+  <div class="large-12 medium-12 small-12 columns picture_box">
+      <div class="small-10 small-offset-1 medium-8 medium-offset-2 large-6 large-offset-3 columns">
+        <form action="/makeaccount" method="POST">
+        <p>アカウント作成</p>
+        ユーザID:<input type="text" pattern="^[0-9a-z]+$" name="user_id" >
+        ニックネーム:
+        <input type="text" name="user_name" >
+        <br>
+        パスワード:
+        <input type="password" id="password" pattern="^[0-9a-z]+$" name="pass" >
+        <br>
+        パスワード 確認:
+        <input type="password" class="form-control" name="confirm" oninput="CheckPassword(this)" required>
+        <br>
+        <p>性別</p>
+        <input type="radio" value="0" name="sex">男性
+        <input type="radio" value="1" name="sex">女性
+        <br>
+        <input type="submit" id="fab" value="作成"/>
+        </form>
+        </div>
   </div>
 
   <br>
