@@ -1,5 +1,5 @@
 $(document).foundation()
-
+alert("Hello JavaScript:D");
 function CheckPassword(confirm){
 		// 入力値取得
 		var input1 = password.value;
