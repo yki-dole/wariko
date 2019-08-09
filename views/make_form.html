@@ -28,29 +28,23 @@
   <div class="large-12 medium-12 small-12 columns picture_box" >
       <center>
         <form action="/makeaccount" method="POST">
-          <table>
-            <tr>
-              <th>ユーザID</th>
-              <td><input type="text" pattern="^[0-9a-z]+$" name="user_id" style="width:300px;"></td>
-            </tr>
-            <tr>
-              <th>ニックネーム</th>
-              <td><input type="text" name="user_name" style="width:300px;"></td>
-            </tr>
-            <tr>
-              <th>パスワード</th>
-              <td><input type="password" name="password" id="password" pattern="^[0-9a-z]+$"  style="width:300px;"></td>
-            </tr>
-            <tr>
-              <th>パスワード 確認</th>
-              <td><input type="password" name="confirm" style="width:300px;" oninput="CheckPassword(this)" required></td>
-            </tr>
 
+アカウント作成
+              <th>ユーザID:<input type="text" pattern="^[0-9a-z]+$" name="user_id" style="width:300px;">
+            ニックネーム:
+            <input type="text" name="user_name" style="width:300px;">
+            <br>
+            パスワード:
+            <input type="password" name="password" id="password" pattern="^[0-9a-z]+$"  style="width:300px;">
+            <br>
+            パスワード 確認:<input type="password" name="confirm" style="width:300px;" oninput="CheckPassword(this)" required>
+            <br>
             <p>性別</p>
             <input type="radio" value="0" name="sex">男性
             <input type="radio" value="1" name="sex">女性
-            </table>
+            <br>
             <input type="submit" id="fab" value="作成"/>
+          </table>
         </form>
         </center>
         <br>
