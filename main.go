@@ -50,7 +50,6 @@ func main() {
 	r.GET("/signup", makeAccountAcsessHandler) //アクセス時のハンドラ
 
 	r.POST("/signup", makeAccountHandler) //ログインでPOST投げた時のハンドラ
-
 	r.GET("signup/error", makeAccountFormErrorHandler)
 	r.GET("/", homeHandler)
 
@@ -77,11 +76,13 @@ func IsUserExist(id string, pass string, name string, sex bool) int {
 
 	return 1
 }
+
 func check(er error) {
 	if er != nil {
 		panic(er)
 	}
 }
+
 func makeAccountAcsessHandler(c *gin.Context) {
 	c.HTML(200, "make_form.html", nil)
 }
