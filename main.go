@@ -50,7 +50,6 @@ func main() {
 	r.GET("/signup", makeAccountAcsessHandler) //アクセス時のハンドラ
 
 	r.POST("/signup", makeAccountHandler) //ログインでPOST投げた時のハンドラ
-	r.POST("/signup", loginHandler)
 
 	r.GET("signup/error", makeAccountFormErrorHandler)
 	r.GET("/", homeHandler)
@@ -59,12 +58,6 @@ func main() {
 
 	r.Run(":" + port)
 }
-func check(er error) {
-	if er != nil {
-		panic(er)
-	}
-}
-
 func IsUserExist(id string, pass string, name string, sex bool) int {
 	ci, err := redis.DialURL(os.Getenv("REDIS_URL"))
 	check(err)
@@ -84,7 +77,11 @@ func IsUserExist(id string, pass string, name string, sex bool) int {
 
 	return 1
 }
-
+func check(er error) {
+	if er != nil {
+		panic(er)
+	}
+}
 func makeAccountAcsessHandler(c *gin.Context) {
 	c.HTML(200, "make_form.html", nil)
 }
@@ -94,7 +91,6 @@ func makeAccountFormErrorHandler(c *gin.Context) {
 func homeHandler(c *gin.Context) {
 	c.HTML(200, "home.html", nil)
 }
-
 func loginAcsessHandler(c *gin.Context) {
 	c.HTML(200, "login.html", nil)
 }
