@@ -141,10 +141,7 @@ func userHandler(c *gin.Context) {
 		})
 	} else {
 		text := "Hello  !!"
-		c.Redirect(200, "user.html", gin.H{
-
-			"name": text,
-		})
+		c.Redirect(200, "user.html")
 	}
 
 }
