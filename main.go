@@ -13,7 +13,7 @@ type userMakeForm struct {
 	Id   string `form:"id"`
 	Name string `form:"name"`
 	Pass string `form:"password"`
-	Sex  bool   `form:"sex"`
+	Sex  int    `form:"sex"`
 }
 type userForm struct {
 	Id   string `form:"user_id"`
@@ -58,7 +58,7 @@ func main() {
 
 	r.Run(":" + port)
 }
-func IsUserExist(id string, pass string, name string, sex bool) int {
+func IsUserExist(id string, pass string, name string, sex int) int {
 	ci, err := redis.DialURL(os.Getenv("REDIS_URL"))
 	check(err)
 	defer ci.Close()
