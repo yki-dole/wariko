@@ -66,9 +66,9 @@ func AccountCheck(id string, pass string) int {
 	existed, err := ci.Do("EXISTS", id)
 	check(err)
 	if existed == one {
-		pass_true, err := redis.String(ci.Do("HGET", id, "pass"))
+		passt, err := redis.String(ci.Do("HGET", id, "pass"))
 		check(err)
-		if pass == pass_true {
+		if pass == passt {
 			return 1
 		}
 	}
