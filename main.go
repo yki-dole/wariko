@@ -51,6 +51,7 @@ func main() {
 
 	r.POST("/signup", makeAccountHandler) //ログインでPOST投げた時のハンドラ
 	r.POST("/signin", loginHandler)
+
 	r.GET("signup/error", makeAccountFormErrorHandler)
 	r.GET("/", homeHandler)
 
@@ -134,12 +135,11 @@ func makeAccountHandler(c *gin.Context) {
 }
 
 func loginHandler(c *gin.Context) {
-	var loginData loginForm
-	c.Bind(&loginData)
+
 	// result := AccountCheck(loginData.Id, loginData.Pass)
 	if 0 == 0 {
-		c.Redirect(200, "/signup")
+		c.Redirect(200, "/")
 	} else {
-		c.Redirect(200, "/signup")
+		c.Redirect(200, "/")
 	}
 }
