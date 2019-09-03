@@ -50,6 +50,7 @@ func main() {
 	r.GET("/signup", makeAccountAcsessHandler) //アクセス時のハンドラ
 
 	r.POST("/signup", makeAccountHandler) //ログインでPOST投げた時のハンドラ
+
 	r.GET("signup/error", makeAccountFormErrorHandler)
 	r.GET("/", homeHandler)
 
@@ -99,7 +100,7 @@ func makeAccountHandler(c *gin.Context) {
 	var newForm userMakeForm
 	c.Bind(&newForm)
 	if (newForm.Id == "") || (newForm.Pass == "") {
-		c.Redirect(301, "/signup/error")
+		c.Redirect(301, "/signup/errorfadsada")
 	} else {
 		isExit := IsUserExist(newForm.Id, newForm.Pass, newForm.Name, newForm.Sex)
 		if isExit == 1 {
