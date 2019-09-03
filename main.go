@@ -45,10 +45,12 @@ func main() {
 	r.Static("/js", "./js")
 	r.Static("/picture", "./picture")
 	r.LoadHTMLGlob("views/*")
-	r.GET("/signin", loginFormHandler)
 
-	r.POST("/signup", makeAccountHandler)
-	r.GET("/signup", makeAccountFormHandler)
+	r.GET("/signin", loginAcsessHandler)       //アクセス時のハンドラ
+	r.GET("/signup", makeAccountAcsessHandler) //アクセス時のハンドラ
+
+	r.POST("/signup", makeAccountHandler) //ログインでPOST投げた時のハンドラ
+
 	r.GET("signup/error", makeAccountFormErrorHandler)
 	r.GET("/", homeHandler)
 
@@ -80,7 +82,7 @@ func check(er error) {
 		panic(er)
 	}
 }
-func makeAccountFormHandler(c *gin.Context) {
+func makeAccountAcsessHandler(c *gin.Context) {
 	c.HTML(200, "make_form.html", nil)
 }
 func makeAccountFormErrorHandler(c *gin.Context) {
@@ -89,7 +91,9 @@ func makeAccountFormErrorHandler(c *gin.Context) {
 func homeHandler(c *gin.Context) {
 	c.HTML(200, "home.html", nil)
 }
-
+func loginAcsessHandler(c *gin.Context) {
+	c.HTML(200, "login.html", nil)
+}
 func makeAccountHandler(c *gin.Context) {
 	var newForm userMakeForm
 	c.Bind(&newForm)
@@ -102,7 +106,7 @@ func makeAccountHandler(c *gin.Context) {
 
 		} else {
 
-			c.Redirect(301, "/signup/signin")
+			c.Redirect(301, "/signin")
 		}
 	}
 }
