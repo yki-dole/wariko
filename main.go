@@ -133,18 +133,6 @@ func makeAccountHandler(c *gin.Context) {
 
 }
 
-func userHandler(c *gin.Context) {
-
-	if user.Name == "" {
-		c.HTML(200, "form.html", gin.H{
-			"errortxt": "error:Prease login",
-		})
-	} else {
-		text := "Hello  !!"
-		c.Redirect(200, "user.html")
-	}
-
-}
 func loginHandler(c *gin.Context) {
 	var loginData loginForm
 	c.Bind(&loginData)
