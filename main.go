@@ -154,5 +154,7 @@ func loginHandler(c *gin.Context) {
 	result := AccountCheck(loginData.Id, loginData.Pass)
 	if result == 0 {
 		c.HTML(200, "/login.html", nil)
+	} else {
+		c.HTML(200, "/login.html", nil)
 	}
 }
