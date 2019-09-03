@@ -1,5 +1,9 @@
 [type='text'], [type='password'], [type='date'], [type='datetime'], [type='datetime-local'], [type='month'], [type='week'], [type='email'], [type='number'], [type='search'], [type='tel'], [type='time'], [type='url'], [type='color'], textarea{
-   background-color: rgba(255,255,255,0.1);
+   background-color: rgba(255,255,255,0.3);
+
+}
+[type='text'], [type='password']:hover{
+  background-color: rgba(255,255,255,0.3);
 }
 .inputTable{
    background-color:transparent;
