@@ -74,7 +74,7 @@ func IsUserExist(id string, pass string, name string, sex bool) int {
 		return 0
 	}
 
-	return 1
+	return 100
 }
 
 func check(er error) {
