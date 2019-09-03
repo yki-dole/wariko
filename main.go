@@ -22,8 +22,8 @@ type userForm struct {
 }
 
 type loginForm struct {
-	Id   string `form:"user_id"`
-	Pass string `form:"pass"`
+	Id   string `form:"id"`
+	Pass string `form:"password"`
 }
 
 var user userForm
@@ -50,18 +50,37 @@ func main() {
 	r.GET("/signup", makeAccountAcsessHandler) //アクセス時のハンドラ
 
 	r.POST("/signup", makeAccountHandler) //ログインでPOST投げた時のハンドラ
-
+	r.POST("/signin", loginHandler)
 	r.GET("signup/error", makeAccountFormErrorHandler)
 	r.GET("/", homeHandler)
 
-	r.POST("/user", loginFormHandler)
-
 	r.Run(":" + port)
+}
+func AccountCheck(id string, pass string) int {
+	var one int64
+	one = 1
+	ci, err := redis.DialURL(os.Getenv("REDIS_URL"))
+	check(err)
+	ci.Do("SELECT", 0)
+	defer ci.Close()
+	existed, err := ci.Do("EXISTS", id)
+	check(err)
+	if existed == one {
+		pass_true, err := redis.String(ci.Do("HGET", id, "pass"))
+		check(err)
+		if pass == pass_true {
+			return 1
+		}
+	}
+
+	return 0
+
 }
 func IsUserExist(id string, pass string, name string, sex int) int {
 	ci, err := redis.DialURL(os.Getenv("REDIS_URL"))
 	check(err)
 	defer ci.Close()
+	ci.Do("flushall")
 	ci.Do("SELECT", 0)
 	maked, err := ci.Do("EXISTS", id)
 	check(err)
@@ -71,11 +90,11 @@ func IsUserExist(id string, pass string, name string, sex int) int {
 		ci.Do("HSET", id, "pass", pass)
 		ci.Do("HSET", id, "NN", name)
 		ci.Do("HSET", id, "sex", sex)
-
+		ci.Do("HSET", id, "isPartner", "no")
 		return 0
 	}
 
-	return 100
+	return 1
 }
 
 func check(er error) {
@@ -94,7 +113,9 @@ func homeHandler(c *gin.Context) {
 	c.HTML(200, "home.html", nil)
 }
 func loginAcsessHandler(c *gin.Context) {
-	c.HTML(200, "login.html", nil)
+	c.HTML(301, "/login.html", gin.H{
+		"errortxt": "error",
+	})
 }
 func makeAccountHandler(c *gin.Context) {
 	var newForm userMakeForm
@@ -103,9 +124,15 @@ func makeAccountHandler(c *gin.Context) {
 		c.Redirect(301, "/signup/errorfadsada")
 	} else {
 		isExit := IsUserExist(newForm.Id, newForm.Pass, newForm.Name, newForm.Sex)
-		_ = isExit
-		c.Redirect(301, "/signin")
+		if isExit == 1 {
+			c.Redirect(301, "/signup/error")
 
+		} else {
+
+			c.HTML(301, "/login.html", gin.H{
+				"errortxt": "",
+			})
+		}
 	}
 
 }
@@ -125,38 +152,13 @@ func userHandler(c *gin.Context) {
 	}
 
 }
-func loginFormHandler(c *gin.Context) {
-
-	var fakeForm loginForm
-	c.Bind(&fakeForm)
-	ci, err := redis.DialURL(os.Getenv("REDIS_URL"))
-	check(err)
-	ci.Do("SELECT", 0)
-
-	defer ci.Close()
-	maked, err := ci.Do("EXISTS", fakeForm.Id)
-	if err != nil {
-		panic(err)
-	}
-	var i int64
-	i = 1
-	if maked == i {
-		truePass, err := redis.String(ci.Do("HGET", fakeForm.Id, "pass"))
-		check(err)
-		if truePass == fakeForm.Pass {
-			text := "Hello " + fakeForm.Id + " !!"
-
-			c.HTML(200, "user.html", gin.H{
-				"name": text,
-			})
-		} else {
-			c.HTML(200, "form.html", gin.H{
-				"errortxt": truePass,
-			})
-		}
-	} else {
-		c.HTML(200, "form.html", gin.H{
-			"errortxt": "error:There is not it name",
+func loginHandler(c *gin.Context) {
+	var loginData loginForm
+	c.Bind(&loginData)
+	result := AccountCheck(loginData.Id, loginData.Pass)
+	if result == 1 {
+		c.HTML(301, "/login.html", gin.H{
+			"errortxt": "error",
 		})
 	}
 }
