@@ -50,7 +50,6 @@ func main() {
 	r.GET("/signup", makeAccountAcsessHandler) //アクセス時のハンドラ
 
 	r.POST("/signup", makeAccountHandler) //ログインでPOST投げた時のハンドラ
-	r.POST("/signup", makeAccountHandler) //ログインでPOST投げた時のハンドラ
 	r.GET("signup/error", makeAccountFormErrorHandler)
 	r.GET("/", homeHandler)
 
