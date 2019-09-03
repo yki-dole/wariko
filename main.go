@@ -152,7 +152,7 @@ func loginHandler(c *gin.Context) {
 	var loginData loginForm
 	c.Bind(&loginData)
 	result := AccountCheck(loginData.Id, loginData.Pass)
-	if result == 1 {
+	if result == 0 {
 		c.HTML(200, "/login.html", nil)
 	}
 }
