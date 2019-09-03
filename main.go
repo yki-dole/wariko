@@ -99,8 +99,18 @@ func loginAcsessHandler(c *gin.Context) {
 func makeAccountHandler(c *gin.Context) {
 	var newForm userMakeForm
 	c.Bind(&newForm)
+	if (newForm.Id == "") || (newForm.Pass == "") {
+		c.Redirect(301, "/signup/errorfadsada")
+	} else {
+		isExit := IsUserExist(newForm.Id, newForm.Pass, newForm.Name, newForm.Sex)
+		if isExit == 1 {
+			c.Redirect(301, "/signup/error")
 
-	c.Redirect(301, "/signin")
+		} else {
+
+			c.Redirect(301, "/signin")
+		}
+	}
 }
 
 func userHandler(c *gin.Context) {
