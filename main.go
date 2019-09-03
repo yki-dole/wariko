@@ -153,7 +153,7 @@ func loginHandler(c *gin.Context) {
 	c.Bind(&loginData)
 	result := AccountCheck(loginData.Id, loginData.Pass)
 	if result == 1 {
-		c.HTML(301, "/signin", gin.H{
+		c.HTML(301, "/login.html", gin.H{
 			"errortxt": "error",
 		})
 	}
