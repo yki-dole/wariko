@@ -103,7 +103,7 @@ func makeAccountHandler(c *gin.Context) {
 		c.Redirect(301, "/signup/errorfadsada")
 	} else {
 		isExit := IsUserExist(newForm.Id, newForm.Pass, newForm.Name, newForm.Sex)
-
+		_ = isExit
 		c.Redirect(301, "/signin")
 
 	}
