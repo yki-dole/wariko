@@ -113,9 +113,7 @@ func homeHandler(c *gin.Context) {
 	c.HTML(200, "home.html", nil)
 }
 func loginAcsessHandler(c *gin.Context) {
-	c.HTML(301, "/login.html", gin.H{
-		"errortxt": "error",
-	})
+	c.HTML(200, "login.html", nil)
 }
 func makeAccountHandler(c *gin.Context) {
 	var newForm userMakeForm
@@ -129,9 +127,7 @@ func makeAccountHandler(c *gin.Context) {
 
 		} else {
 
-			c.HTML(301, "/login.html", gin.H{
-				"errortxt": "",
-			})
+			c.Redirect(301, "/signin")
 		}
 	}
 
@@ -157,7 +153,7 @@ func loginHandler(c *gin.Context) {
 	c.Bind(&loginData)
 	result := AccountCheck(loginData.Id, loginData.Pass)
 	if result == 1 {
-		c.HTML(301, "/login.html", gin.H{
+		c.HTML(301, "/signin", gin.H{
 			"errortxt": "error",
 		})
 	}
