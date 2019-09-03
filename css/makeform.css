@@ -6,7 +6,7 @@
 [type='text'], [type='password']:hover{
   background-color: rgba(255,255,255,0.4);
 }
-[type='text'], [type='password']::after{
+[type='text'], [type='password']:after{
   background-color: rgba(255,255,255,0.4);
 }
 [type='text'], [type='password']:active{
