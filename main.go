@@ -10,9 +10,9 @@ import (
 )
 
 type userMakeForm struct {
-	Id   string `form:"user_id"`
-	Name string `form:"user_name"`
-	Pass string `form:"pass"`
+	Id   string `form:"id"`
+	Name string `form:"name"`
+	Pass string `form:"password"`
 	Sex  bool   `form:"sex"`
 }
 type userForm struct {
