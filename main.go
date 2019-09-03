@@ -138,7 +138,7 @@ func loginHandler(c *gin.Context) {
 	c.Bind(&loginData)
 	result := AccountCheck(loginData.Id, loginData.Pass)
 	if result == 0 {
-		c.Redirect(200, "/signup")
+		c.Redirect(200, "/signin")
 	} else {
 		c.Redirect(200, "/signup")
 	}
