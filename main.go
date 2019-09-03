@@ -141,7 +141,7 @@ func userHandler(c *gin.Context) {
 		})
 	} else {
 		text := "Hello  !!"
-		c.HTML(200, "user.html", gin.H{
+		c.Redirect(200, "user.html", gin.H{
 
 			"name": text,
 		})
@@ -153,8 +153,8 @@ func loginHandler(c *gin.Context) {
 	c.Bind(&loginData)
 	result := AccountCheck(loginData.Id, loginData.Pass)
 	if result == 0 {
-		c.HTML(200, "/login.html", nil)
+		c.Redirect(200, "/signin")
 	} else {
-		c.HTML(200, "/login.html", nil)
+		c.Redirect(200, "/signin")
 	}
 }
