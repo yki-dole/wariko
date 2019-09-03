@@ -1,4 +1,6 @@
-
+input {
+   background-color: rgba(255,0,0,0.5);
+}
 .inputTable{
    background-color:transparent;
 }
