@@ -20,24 +20,10 @@ type userForm struct {
 	Name string `form:"user_name"`
 	Sex  bool   `form:"sex"`
 }
+
 type loginForm struct {
-	Id string `form:"user_id"`
-
+	Id   string `form:"user_id"`
 	Pass string `form:"pass"`
-}
-type urlData struct {
-	Url     string `form:"add_url"`
-	Type    string `form:"type"`
-	Title   string `form:"url_title"`
-	TextKey string
-}
-
-type urlInputForm struct {
-	Url   string `form:"add_url"`
-	Type  string `form:"type"`
-	Title string `form:"url_title"`
-	Text  string `form:"url_text"`
-	Value int    `form:"value"`
 }
 
 var user userForm
@@ -70,7 +56,25 @@ func main() {
 
 	r.Run(":" + port)
 }
+func IsUserExist(id string, pass string, name string, sex bool) int {
+	ci, err := redis.DialURL(os.Getenv("REDIS_URL"))
+	check(err)
+	defer ci.Close()
+	ci.Do("SELECT", 0)
+	maked, err := ci.Do("EXISTS", id)
+	check(err)
+	var i int64
+	i = 0
+	if maked == i {
+		ci.Do("HSET", id, "pass", pass)
+		ci.Do("HSET", id, "NN", name)
+		ci.Do("HSET", id, "sex", sex)
 
+		return 0
+	}
+
+	return 1
+}
 func check(er error) {
 	if er != nil {
 		panic(er)
@@ -88,27 +92,18 @@ func homeHandler(c *gin.Context) {
 
 func makeAccountHandler(c *gin.Context) {
 	var newForm userMakeForm
-	ci, err := redis.DialURL(os.Getenv("REDIS_URL"))
-	check(err)
 	c.Bind(&newForm)
-	defer ci.Close()
 	if (newForm.Id == "") || (newForm.Pass == "") {
 		c.Redirect(301, "/signup/error")
 	} else {
-		ci.Do("SELECT", 0)
-		maked, err := ci.Do("EXISTS", newForm.Id)
-		check(err)
-		var i int64
-		i = 0
-		if maked == i {
-			ci.Do("HSET", newForm.Id, "pass", newForm.Pass)
-			ci.Do("HSET", newForm.Id, "NN", newForm.Name)
-			ci.Do("HSET", newForm.Id, "sex", newForm.Sex)
-			c.HTML(200, "form.html", nil)
-		} else {
+		isExit := IsUserExist(newForm.Id, newForm.Pass, newForm.Name, newForm.Sex)
+		if isExit == 1 {
 			c.Redirect(301, "/signup/error")
-		}
 
+		} else {
+
+			c.Redirect(301, "/signup/signin")
+		}
 	}
 }
 
