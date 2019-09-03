@@ -134,9 +134,8 @@ func makeAccountHandler(c *gin.Context) {
 }
 
 func loginHandler(c *gin.Context) {
-	var loginData loginForm
-	c.Bind(&loginData)
-	result := AccountCheck(loginData.Id, loginData.Pass)
+
+	result := 0
 	if result == 0 {
 		c.Redirect(200, "/signin")
 	} else {
